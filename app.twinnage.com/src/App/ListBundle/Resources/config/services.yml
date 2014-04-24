@@ -1,0 +1,7 @@
+parameters:
+#    app_list.example.class: App\ListBundle\Example
+
+services:
+#    app_list.example:
+#        class: %app_list.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

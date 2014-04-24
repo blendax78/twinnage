@@ -1,0 +1,88 @@
+#app_home:
+#    resource: "@AppHomeBundle/Resources/config/routing.yml"
+#    prefix:   /
+
+dashboard:
+    pattern:  /
+    defaults: { _controller: AppHomeBundle:Default:index }
+
+login:
+    pattern:   /login
+    defaults:  { _controller: AppUserBundle:Default:login }
+
+snippet_list:
+    pattern:    /snippet
+    defaults:   { _controller: AppSnippetBundle:Default:index }
+
+add_snippet:
+    pattern:    /snippet/add
+    defaults:   { _controller: AppSnippetBundle:Default:add }
+
+edit_snippet:
+    pattern:    /snippet/edit/{id}
+    defaults:   { _controller: AppSnippetBundle:Default:edit }
+
+view_snippet:
+    pattern:    /snippet/read/{id}
+    defaults:   { _controller: AppSnippetBundle:Default:read }
+
+view_audit:
+    pattern:    /snippet/audit/{id}
+    defaults:   { _controller: AppSnippetBundle:Default:readAudit }
+
+view_snippet_list:
+    pattern:    /snippet/read/
+    defaults:   { _controller: AppSnippetBundle:Default:index }
+
+api_main:
+    pattern:    /api/
+    defaults:   { _controller: ApiSnippetBundle:Default:index }
+
+api_snippet_get:
+#Returns all snippet info.
+    pattern:    /api/snippet/get/{id}/key/{key}
+    defaults:   { _controller: ApiSnippetBundle:Default:get }
+
+api_snippet_get_all_offset:
+    pattern: /api/snippet/all/{account_id}/start/{start}/stop/{stop}
+    defaults: { _controller: ApiSnippetBundle:Default:all }
+
+api_snippet_get_audits:
+    pattern: /api/snippet/{snippet_id}/account/{account_id}/audits
+    defaults: { _controller: ApiSnippetBundle:Default:getAudit }
+
+api_snippet_get_all:
+    pattern: /api/snippet/all/{account_id}
+    defaults: { _controller: ApiSnippetBundle:Default:all }
+
+api_snippet_get_list:
+#Returns all snippet info.
+    pattern:    /api/snippet/list/{account_id}_{ids}
+    defaults:   { _controller: ApiSnippetBundle:Default:list }
+
+api_snippet_content:
+#Returns snippet content.
+    pattern:    /api/snippet/{account_id}_{id}
+    defaults:   { _controller: ApiSnippetBundle:Default:content }
+
+ajax_delete_snippet:
+    pattern:  /ajax/del/{id}/account/{account_id}
+    defaults: { _controller: AppSnippetBundle:Ajax:delete }
+    requirements:
+        _method:  POST
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern:   /logout
+
+
+#acme_hello:
+#    resource: "@AcmeHelloBundle/Resources/config/routing.yml"
+#    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal

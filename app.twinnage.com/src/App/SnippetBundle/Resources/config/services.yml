@@ -1,0 +1,7 @@
+parameters:
+#    app_snippet.example.class: App\SnippetBundle\Example
+
+services:
+#    app_snippet.example:
+#        class: %app_snippet.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

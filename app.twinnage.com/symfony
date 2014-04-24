@@ -1,0 +1,45 @@
+#!/bin/bash
+
+case "$1" in
+
+	"generate:entities") 
+		php app/console doctrine:generate:entities App
+	;;
+	"schema:update")
+		php app/console doctrine:schema:update --force
+	;;
+	"devReset")
+		app/console doctrine:generate:entities App
+		php app/console doctrine:schema:update --force
+
+		if [ "$2" != "dev" ]
+			then
+			echo "Updating the schema in prod"
+			php app/console doctrine:schema:update --force --env=prod
+		fi
+	;;
+	"createBundle")
+		#Ex. $2= App/AccountBundle
+		php app/console generate:bundle --namespace="$2" --format=yml
+	;;
+	"createModel")
+		#Ex. $2= AppAccountBundle:Account
+		php app/console doctrine:generate:entity --entity="$2" --fields="is_deleted created_by created_at updated_by updated_at" --format=yml
+	;;
+	"cc")
+		rm -fr app/cache/prod/*
+		rm -fr app/cache/dev/*
+		php app/console cache:clear --env=prod --no-warmup --no-optional-warmers
+		php app/console cache:clear
+		chmod -R 777 app/cache
+	;;
+	"update:assetic")
+		php app/console assetic:dump --env=prod --no-debug
+	;;
+	"?")
+		echo "generate:entities / schema:update / devReset / createBundle / createModel / update:assetic"
+	;;
+	*) 
+		php app/console "$*"
+	;;
+esac

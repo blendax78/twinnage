@@ -1,0 +1,46 @@
+{# src/App/SnippetBundle/Resources/views/base.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block title %}Edit Snippet - {{ snippet.name }}{% endblock %}
+
+{% block body %}
+    <h2>Edit Snippet</h2>
+    <div class="row">
+        <div class="span9">
+            <form action="{{ url('edit_snippet',{ 'id': snippet.id }) }}" class="form-horizontal box" method="post" {{ form_enctype(form) }}>
+                <div class="control-group">
+                    <label class="control-label" for="name">{{ form_label(form.name) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.name, { 'attr': {'class': 'span4', 'placeholder':'Enter a name'} }) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">{{ form_label(form.snippet_type) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.snippet_type, { 'attr': {'class': ''} }) }}
+                        {{ form_errors(form.snippet_type) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="content">Content</label>
+                    <div class="controls">
+                        {{ form_widget(form.content, { 'attr': {'class': 'span6', 'rows': '10', 'placeholder':'Enter some content.'} }) }}
+                        {{ form_errors(form.content) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        {{ form_errors(form) }}
+                        {{ form_rest(form) }}
+                        <input type="submit" value="Save" class="btn btn-primary" name="editSnippetSubmit" />
+                        <a href="{{ url('view_snippet',{ 'id': snippet.id }) }}" class="btn">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% include 'AppSnippetBundle:Default:preview.html.twig' with {'snippet': snippet}  %}
+
+{% endblock %}

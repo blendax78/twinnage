@@ -1,0 +1,114 @@
+{# src/App/SnippetBundle/Resources/views/base.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block title %}View Snippet - {{ snippet.name }}{% endblock %}
+{% block bodycss %}{% endblock %}
+{% block javascript %}
+    {% include '::googlejs.html.twig' %}
+
+    <script type='text/javascript' xmlns="http://www.w3.org/1999/html">
+        
+        var columnInfo = [  
+                    {name: "Name", type: "string"},
+                    {name: "Created At", type: "string"}
+                    ];
+        var listObjects = [];
+        
+        $.get(  '{{ url('api_snippet_get_audits', { 'account_id': app.user.accountId, 'snippet_id': snippet.id }) }}', /*/api/snippet/all/1/start/4/stop/3*/ 
+                function(result){
+                    var jsonS = $.parseJSON(result);
+
+                    if (jsonS.length > 0){
+                        $.each(jsonS, function(index,j){
+                            listObjects.push(['<a href="/snippet/audit/' + j.id + '">' + j.name +'</a>',
+                                            formatDate(j.created_at.date)
+                                            ]);
+                        });
+                    }
+                    drawTable(columnInfo, listObjects, 'snippetAuditTableDiv', {showRowNumber: true, pageSize: 5} );
+                });
+    </script>
+    <script type="text/javascript" src="{{ asset('js/list.js') }}"></script>
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    <h2>View Snippet</h2>
+    <div class="row">
+        <div class="span9 box">
+            <div class="row control-group">
+                <div class="span2 right bold">Name</div>
+                <div class="span6 left ">{{ snippet.name }}</div>
+            </div>
+            <div class="row control-group">
+                <div class="span2 right bold">Snippet Type</div>
+                <div class="span6 left">{{ snippetTypeName }}</div>
+            </div>
+            <div class="row control-group">
+                <div class="span2 right bold">Content</div>
+                <div class="span6 left">
+                    <div class="row">
+                        <div class="span6"><pre class="prettyprint">{{ snippet.content }}</pre></div>
+                    </div>
+                    <div class="row">
+                        <div class="span6 center " >
+                            <div class="btn-group">
+                                {%  if isHTML %}
+                                      <button class="btn" id="snippetPreviewBtn">Preview</button>
+                                {% endif %}
+                              <a href="{{ url('edit_snippet', { 'id': snippet.id }) }}" class="btn ">Edit
+                              </a>
+
+                            <button class="btn  " data-toggle="dropdown">Code <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                              {% if isHTML %}<li><a href="#" id="viewIframeCode">iFrame</a></li>{% endif %}
+                              <li><a href="#" id="viewJavascriptCode">Javascript</a></li>
+                            </ul>
+                  
+                              <button class="btn btn-danger" data-account_id="{{ snippet.accountId }}" data-id="{{ snippet.id }}" id="deleteSnippetBtn"><i class="icon-trash icon-white"></i> Delete
+                              </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span11"><h4>Snippet Stats</h4></div>
+    </div>
+    <div class="row">
+        <div class="span9 box">
+            <div class="row ">
+                <div class="span2 right bold"># Views</div>
+                <div class="span2 left ">{{ snippet.views }}</div>
+                <div class="span2 right bold">Created at</div>
+                <div class="span2 left ">{{ snippet.createdAt|date("m/d/Y H:i:s")}}</div>
+            </div>
+            <div class="row">
+                <div class="span2 right bold">Last Viewed</div>
+                <div class="span2 left ">{% if snippet.lastViewed %}{{ snippet.lastViewed|date("m/d/Y H:i:s") }}{% endif %}</div>
+                <div class="span2 right bold">Updated at</div>
+                <div class="span2 left ">{{ snippet.updatedAt|date("m/d/Y H:i:s") }}</div>
+            </div>
+        </div>
+    </div>
+
+		<div class="row">
+    	<div class="span11"><h4>Snippet Audit Log</h4></div>
+    </div>
+    <div class="row">
+    	{# include 'AppListBundle:Default:list.html.twig' with {'objects': snippetAudits} #}
+    	<div class="span8" id="snippetAuditTableDiv"><p><img height="20px" src="{{ asset('images/loading.gif') }}" alt="Loading..."/></p></div>
+		</div>
+{# <iframe src="{{ url('api_snippet_content', { 'account_id': snippet.accountId, 'id': snippet.id } ) }}" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe> #}
+    {% if isHTML %}
+	    {% include 'AppSnippetBundle:Default:preview.html.twig' with {'snippet': snippet}  %} 
+	    {% include 'AppSnippetBundle:Default:iframemodal.html.twig' with 
+	    	{'modalID': 'iframeCodeModal', headerTxt: 'iFrame Code', snippet: snippet } %}
+   	{% endif %}
+    {% include 'AppSnippetBundle:Default:javascriptmodal.html.twig' with 
+    	{'modalID': 'javascriptCodeModal', headerTxt: 'Javascript Code', snippet: snippet, baseUrl: baseUrl} %}
+	<link href="{{asset('/css/prettify.css') }}" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="{{ asset('/js/prettify.js') }}"></script>
+	<script type="text/javascript">$(document).ready(function(){prettyPrint();});</script>
+{% endblock %}

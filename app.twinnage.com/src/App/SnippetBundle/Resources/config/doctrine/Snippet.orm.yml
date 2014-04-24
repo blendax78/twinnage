@@ -1,0 +1,40 @@
+App\SnippetBundle\Entity\Snippet:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string(255)
+        account_id:
+            type: integer
+        content:
+            type: text
+        custom_url_id:
+            type: integer
+            nullable: true
+        snippet_type:
+            type: integer
+        views:
+            type: integer
+            nullable: true
+        last_viewed:
+            type: datetime
+            nullable: true
+        is_deleted: 
+          type: boolean
+          nullable: true
+        created_by:
+            type: integer
+        created_at:
+            type: datetime
+        updated_by:
+            type: integer
+            nullable: true
+        updated_at:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

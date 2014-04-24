@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 
+    database_port: '3306'
+    database_name: twinnage
+    database_user: 
+    database_password: 
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: 00094f094176e0069faf04a098555ef949c69c16
+    database_path: null

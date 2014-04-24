@@ -1,0 +1,7 @@
+parameters:
+#    app_custom_url.example.class: App\CustomUrlBundle\Example
+
+services:
+#    app_custom_url.example:
+#        class: %app_custom_url.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

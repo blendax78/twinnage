@@ -1,0 +1,6 @@
+RewriteEngine on
+#RewriteCond %{HTTP_HOST} ^domain.com$ [NC,OR]
+#RewriteCond %{HTTP_HOST} ^www.domain.com$
+RewriteCond %{REQUEST_URI} !web/
+#RewriteRule (.*) /web/app.php?=$1 [L]
+RewriteRule (.*) /web/$1 [L]

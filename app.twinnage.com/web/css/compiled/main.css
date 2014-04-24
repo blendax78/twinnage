@@ -1,0 +1,173 @@
+.pln {
+    color: #000;
+}
+@media screen {
+    .str {
+    color: #080;
+}
+.kwd {
+    color: #008;
+}
+.com {
+    color: #800;
+}
+.typ {
+    color: #606;
+}
+.lit {
+    color: #066;
+}
+.pun, .opn, .clo {
+    color: #660;
+}
+.tag {
+    color: #008;
+}
+.atn {
+    color: #606;
+}
+.atv {
+    color: #080;
+}
+.dec, .var {
+    color: #606;
+}
+.fun {
+    color: red;
+}
+}@media print, projection {
+    .str {
+    color: #060;
+}
+.kwd {
+    color: #006;
+    font-weight: bold;
+}
+.com {
+    color: #600;
+    font-style: italic;
+}
+.typ {
+    color: #404;
+    font-weight: bold;
+}
+.lit {
+    color: #044;
+}
+.pun, .opn, .clo {
+    color: #440;
+}
+.tag {
+    color: #006;
+    font-weight: bold;
+}
+.atn {
+    color: #404;
+}
+.atv {
+    color: #060;
+}
+}pre.prettyprint {
+    /*padding: 2px;
+    border: 1px solid #888;*/
+	color: #fff;
+    padding: 10px;
+    line-height: 18px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    margin-bottom: 15px;
+}
+ol.linenums {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
+    list-style-type: none;
+}
+li.L1, li.L3, li.L5, li.L7, li.L9 {
+    background: #eee;
+}
+.error {
+		color: red;
+	}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.thinBorder {
+    border: thin solid #ddd;
+}
+
+.top {
+    vertical-align: top;
+}
+
+.fakelink {
+    color: #049cdb;
+    cursor: pointer;
+}
+
+.table-row-hover {
+    background-color: #f5f5f5;
+}
+
+.table-row-odd {
+    background-color: #f9f9f9;
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.loginBox {
+	background-color: #fff; 
+	border: 1px solid #ddd; 
+	-webkit-border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	border-radius: 4px; 
+	padding-bottom:15px;
+	margin-left: auto; margin-right: auto;
+	width: 440px;
+	float: none;
+}
+
+.box {
+	background-color: #fff; 
+	border: 1px solid #ddd; 
+	-webkit-border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	border-radius: 4px; 
+	padding: 15px 15px 15px 15px;
+}
+
+.lightGreyBackground {
+	background-color: #f5f5f5;
+}
+
+.height60 {
+	height: 60px;
+}
+
+.height20 {
+	height: 20px;
+}
+
+.padding15 {
+	padding: 15px;
+}

@@ -1,0 +1,40 @@
+{# app/Resources/views/base.html.twig #}
+<!DOCTYPE html>
+<html lang="en" >
+{% block head %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% block jquery %}
+    {# jquery is loaded locally #}
+        {% javascripts 'js/jquery/*' output='js/compiled/jquery.js' %}
+            <script type="text/javascript" src="{{ asset_url }}" ></script>
+        {% endjavascripts %}
+    {% endblock %}
+
+	{# Include Bootstrap before anything else (after jQuery) #}
+	{% include '::base.bootstrap.twig' %}
+    {% block javascript %}{% endblock %}
+
+    {% javascripts 'js/twinnage.js' output='js/compiled/twinnage.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+
+    {% block styles %}
+    {% endblock %}
+    
+    {% stylesheets 'css/*' output='css/compiled/main.css' %}
+		<link href="{{ asset_url }}" rel="stylesheet">
+	{% endstylesheets %}
+
+</head>
+{% endblock %}
+    <body class=" {% block bodycss %}{% endblock %}">
+    {% if is_granted('ROLE_USER') %}{% include '::base.menu.twig' with {'user': app.user}  %}{% endif %}
+    <div class="container">
+	{% block body %}
+	{% endblock %}
+	</div>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+App\CustomUrlBundle\Entity\CustomUrl:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        url:
+            type: string(255)
+        object_id:
+            type: integer
+        object_type:
+            type: integer
+        account_id:
+            type: integer
+        is_deleted:
+            type: boolean
+        created_by:
+            type: integer(4)
+        created_at:
+            type: datetime
+        updated_by:
+            type: integer(4)
+        updated_at:
+            type: datetime
+    lifecycleCallbacks: {  }

@@ -1,0 +1,49 @@
+{# src/App/SnippetBundle/Resources/views/base.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block title %}Snippets{% endblock %}
+
+{% block javascript %}
+    {% include '::googlejs.html.twig' %}
+
+    <script type='text/javascript' xmlns="http://www.w3.org/1999/html">
+        
+        var columnInfo = [  
+                    {name: "Name", type: "string"},
+                    {name: "Views", type: "number"},
+                    {name: "Last Viewed", type: "string"},
+                    {name: "Created At", type: "string"},
+                    {name: "Updated At", type: "string"},
+                    ];
+        var listObjects = [];
+        
+        $.get(  '{{ url('api_snippet_get_all', { 'account_id': app.user.accountId }) }}', /*/api/snippet/all/1/start/4/stop/3*/ 
+                function(result){
+                    var jsonS = $.parseJSON(result);
+
+                    if (jsonS.length > 0){
+                        $.each(jsonS, function(index,j){
+                            j.last_viewed = (j.last_viewed == null) ? ' ' : j.last_viewed.date;
+                            listObjects.push(['<a href="/snippet/read/' + j.id + '">' + j.name +'</a>',
+                                            j.views,
+                                            (j.last_viewed != " ") ? formatDate(j.last_viewed) : '',
+                                            formatDate(j.created_at.date),
+                                            formatDate(j.updated_at.date)
+                                            ]);
+                        });
+                    }
+                    drawTable(columnInfo, listObjects, 'snippetTableDiv');
+                });
+    </script>
+    <script type="text/javascript" src="{{ asset('js/list.js') }}"></script>
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+	<div class="row">
+		<div class="span11"><h2>Snippets</h2></div>
+	</div>
+	<div class="row">
+    {# include 'AppListBundle:Default:list.html.twig' with {'objects': snippets} #}
+    <div class="span11" id="snippetTableDiv"><p><img height="20px" src="{{ asset('images/loading.gif') }}" alt="Loading..."/></p></div>
+  </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{# src/App/SnippetBundle/Resources/views/base.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block title %}Add a Snippet{% endblock %}
+
+{% block body %}
+	<h2>Add a Snippet</h2>
+    <div class="row">
+    	<div class="span9">
+            <form action="{{ path('add_snippet') }}" class="form-horizontal box" method="post" {{ form_enctype(form) }}>
+                <div class="control-group">
+                    <label class="control-label" for="name">{{ form_label(form.name) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.name, { 'attr': {'class': 'span4', 'placeholder':'Enter a name'} }) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">{{ form_label(form.snippet_type) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.snippet_type, { 'attr': {'class': ''} }) }}
+                        {{ form_errors(form.snippet_type) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="content">Content</label>
+                    <div class="controls">
+                        {{ form_widget(form.content, { 'attr': {'class': 'span6', 'rows': '10', 'placeholder':'Enter some content.'} }) }}
+                        {{ form_errors(form.content) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        {{ form_errors(form) }}
+                        {{ form_rest(form) }}
+                        <input type="submit" value="Save" class="btn btn-primary" name="newSnippetSubmit" />
+                        <a href="{{ url('snippet_list') }}" class="btn">Cancel</a>
+                    </div>
+                </div>
+            </form>
+    	</div>
+    </div>
+
+{% endblock %}

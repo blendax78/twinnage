@@ -1,0 +1,18 @@
+
+{#  Expects: modalID, headerTxt, bodyTxt #}
+{% block modal %}
+<div id="{{ modalID }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">{{ headerTxt }}</h3>
+    </div>
+    <div class="modal-body">
+        <p id="p_{{ modalID }}">{%block bodyTxt %}{{ bodyTxt }}{% endblock %}</p>
+    </div>
+    <div class="modal-footer">
+    	{% block buttons %}
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

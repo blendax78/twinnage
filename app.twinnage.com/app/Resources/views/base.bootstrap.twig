@@ -1,0 +1,11 @@
+{% javascripts 'bootstrap/js/bootstrap.js' output='js/compiled/bootstrap.js'  %}
+	<script type="text/javascript" src="{{ asset_url }}" ></script>
+{% endjavascripts %}
+
+{% stylesheets 'bootstrap/css/bootstrap.css' output='css/compiled/bootstrap.css' %}
+	<link href="{{ asset_url }}" rel="stylesheet" media="screen">
+{% endstylesheets %}
+
+{% stylesheets 'bootstrap/css/bootstrap-responsive.css' output='css/compiled/bootstrap-responsive.css' %}
+	<link href="{{ asset_url }}" rel="stylesheet" >
+{% endstylesheets %}

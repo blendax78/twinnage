@@ -1,0 +1,60 @@
+App\AccountBundle\Entity\Account:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: '255'
+        website: 
+            type: string(255)
+        tracker_domain: 
+          type: string(255)
+        country: 
+          type: string(32)
+        address_one: 
+          type: string(255)
+        address_two: 
+          type: string(255)
+        city: 
+          type: string(32)
+        state: 
+          type: string(32)
+        territory: 
+          type: string(32)
+        zip: 
+          type: string(32)
+        phone: 
+          type: string(32)
+        fax: 
+          type: string(32)
+        account_type: 
+          type: integer(4)
+        encryption_key: 
+          type: string(32)
+        max_users: 
+          type: integer(4)
+          default: 5
+        expiration: 
+          type: datetime
+        billing_date: 
+          type: date
+        is_deleted: 
+          type: boolean
+          default: 0
+        is_deleted:
+            type: boolean
+            default: 0
+        created_by:
+            type: integer
+        created_at:
+            type: datetime
+        updated_by:
+            type: integer
+        updated_at:
+            type: datetime
+    lifecycleCallbacks: {  }

@@ -1,0 +1,32 @@
+{# src/App/HomeBundle/Resources/views/base.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+	<h2>Welcome to twinnage!</h2>
+		<div class="row">
+	    <div class="span6 box height60">
+	    	You have <a href="{{ url('snippet_list') }}">{{ snippets|length }}</a> active snippets.
+	    	<br/>
+	    </div>
+		</div>
+		{% if most_viewed|length > 0 %}
+		<div class="row height20"></div>
+		<div class="row">
+			<div class="span6 box height60">
+	    	Your most-viewed snippet is <a href="{{ url('view_snippet', { 'id': most_viewed.id }) }}">{{most_viewed.name}}</a> with <b>{{most_viewed.views}}</b> views.
+	    </div>
+		</div>
+		{% endif %}
+		{% if last_viewed|length > 0 %}
+		<div class="row height20"></div>
+		<div class="row">
+			<div class="span6 box height60">
+	    	Your most-recently viewed snippet is <a href="{{ url('view_snippet', { 'id': last_viewed.id }) }}">{{last_viewed.name}}</a>.<br/>
+	    	It was last viewed on <b>{{last_viewed.lastViewed|date("m/d/Y H:i:s")}}</b>. 
+	    </div>
+		</div>
+		{% endif %}
+		
+{% endblock %}

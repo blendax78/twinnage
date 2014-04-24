@@ -1,0 +1,62 @@
+{# src/App/SnippetBundle/Resources/views/base.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block title %}View Snippet Audit - {{ snippet.name }} ({{ snippet.id }}){% endblock %}
+{% block bodycss %}{% endblock %}
+
+{% block body %}
+    <h2>View Snippet Audit</h2>
+    <div class="row">
+        <div class="span9 box">
+            <div class="row control-group">
+                <div class="span2 right bold">Name</div>
+                <div class="span6 left ">{{ snippet.name }}</div>
+            </div>
+            <div class="row control-group">
+                <div class="span2 right bold">Snippet Type</div>
+                <div class="span6 left">{{ snippetTypeName }}</div>
+            </div>
+            <div class="row control-group">
+                <div class="span2 right bold">Content</div>
+                <div class="span6 left">
+                    <div class="row">
+                        <div class="span6"><pre class="prettyprint">{{ snippet.content }}</pre></div>
+                    </div>
+                    <div class="row">
+                        <div class="span6 center " >
+                            <div class="btn-group">
+                                {%  if isHTML %}
+                                      <button class="btn" id="snippetPreviewBtn">Preview</button>
+                                {% endif %}
+                              <a href="{{ url('edit_snippet', { 'id': snippet.id }) }}" class="btn ">Edit
+                              </a>
+
+                            <button class="btn  " data-toggle="dropdown">Code <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                              {% if isHTML %}<li><a href="#" id="viewIframeCode">iFrame</a></li>{% endif %}
+                              <li><a href="#" id="viewJavascriptCode">Javascript</a></li>
+                            </ul>
+                  
+                              <button class="btn btn-danger" data-account_id="{{ snippet.accountId }}" data-id="{{ snippet.id }}" id="deleteSnippetBtn"><i class="icon-trash icon-white"></i> Delete
+                              </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{# <iframe src="{{ url('api_snippet_content', { 'account_id': snippet.accountId, 'id': snippet.id } ) }}" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe> #}
+    {% if isHTML %}
+	    {% include 'AppSnippetBundle:Default:preview.html.twig' with {'snippet': snippet}  %} 
+	    {% include 'AppSnippetBundle:Default:iframemodal.html.twig' with 
+	    	{'modalID': 'iframeCodeModal', headerTxt: 'iFrame Code', snippet: snippet } %}
+   	{% endif %}
+    {% include 'AppSnippetBundle:Default:javascriptmodal.html.twig' with 
+    	{'modalID': 'javascriptCodeModal', headerTxt: 'Javascript Code', snippet: snippet, baseUrl: baseUrl} %}
+	<link href="{{asset('/css/prettify.css') }}" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="{{ asset('/js/prettify.js') }}"></script>
+	<script type="text/javascript">$(document).ready(function(){prettyPrint();});</script>
+{% endblock %}

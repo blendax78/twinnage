@@ -1,0 +1,9 @@
+{% block list %}
+
+	{% if objects|length > 0 %}
+	    {% for object in objects %}
+        	<li>{{ object.name }}</li>
+    	{% endfor %}
+    {% endif %}
+
+{% endblock %}

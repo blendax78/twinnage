@@ -1,0 +1,52 @@
+{# app/Resources/views/base.menu.twig #}
+
+{% block menu %}
+
+<div id="" class="navbar navbar-fixed-top">
+              <div class="navbar-inner">
+                <div class="container" >
+                  <a class="brand" href="{{ url('dashboard') }}">twinnage</a>
+                  <ul class="nav" role="navigation">
+                    <li {% if app.request.attributes.get('_route')  == 'dashboard' %} 
+                    		class="active"
+                    	{% endif %}>
+    					<a href="{{ url('dashboard') }}">Home</a>
+  					</li>
+                    <li class="dropdown">
+                      <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Snippets <b class="caret"></b></a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                        <li {% if app.request.attributes.get('_route') == 'snippet_list' %} 
+                    		class="active"
+                    	{% endif %}>
+                    		<a tabindex="-1" class="active" href="{{ url('snippet_list') }}">Snippet List</a></li>
+                        <li {% if app.request.attributes.get('_route') == 'add_snippet' %} 
+                    		class="active"
+                    	{% endif %}>
+                    		<a tabindex="-1" href="{{ url('add_snippet') }}">Add Snippet</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" id="drop2" role="button" class="dropdown-toggle" data-toggle="dropdown">Archives <b class="caret"></b></a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                        <li><a tabindex="-1" href="#">Action</a></li>
+                        <li><a tabindex="-1" href="#">Another action</a></li>
+                        <li><a tabindex="-1" href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="#">Separated link</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <ul class="nav pull-right">
+                    <li id="fat-menu" class="dropdown">
+                      <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ user.getEmail() }} <b class="caret"></b></a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                        <li><a tabindex="-1" href="#">Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href	="{{ url('logout') }}">Log out</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+{% endblock %}
